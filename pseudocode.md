@@ -46,4 +46,4 @@ Definition:
     - FK cuisine
         - title
 
-![db-diagram]('Backend Bistro.png')
+![db-diagram](Backend Bistro.png)
