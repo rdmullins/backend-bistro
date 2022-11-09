@@ -42,8 +42,14 @@ Definition:
     - title
     - description
     - price
-    - spice_level
+    - spicy_level
     - FK cuisine
         - title
+- category
+    - id
+    - title
+- cuisine
+    - id
+    - title
 
 ![db-diagram](Backend Bistro.png)
