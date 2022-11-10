@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Dish, Cuisine, Category
+from .models import Dish, Cuisine, Category, Ingredient
 from django.forms.models import model_to_dict
+from django.db.models import Q
 
 # Create your views here.
 def fullmenu(request):
@@ -22,10 +23,13 @@ def fullmenu(request):
             "category": {
                 "title": item.category_id.title
             },
+            "ingredients": {
+                "title": list(item.ingredient_id.values())
+            },
             # "cuisine": (Cuisine.objects.get(id=item.cuisine_id)),
             # "category": (Category.objects.get(id=item.category_id)),
         })
-    print(dishes)
+    #print(dishes)
     return JsonResponse(dishes, safe=False)
 
 def appetizers(request):
@@ -56,3 +60,11 @@ def sides(request):
 def desserts(request):
     desserts = list(Dish.objects.filter(category_id=7).values())
     return JsonResponse(desserts, safe=False)
+
+def eggdishes(request):
+    eggdishes = list(Dish.objects.filter(ingredient_id=1).values())
+    return JsonResponse(eggdishes, safe=False)
+
+def dairy(request):
+    dairy = list(Dish.objects.filter(Q(ingredient_id=2) | Q(ingredient_id=3) | Q(ingredient_id=8)).values())
+    return JsonResponse(dairy, safe=False)
