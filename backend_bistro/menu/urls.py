@@ -4,4 +4,11 @@ from . import views
 
 urlpatterns = [
     path('fullmenu', views.fullmenu, name='Return Full Menu'),
+    path('appetizers', views.appetizers),
+    path('breakfast', views.breakfast),
+    path('brunch', views.brunch),
+    path('lunch', views.lunch),
+    path('dinner', views.dinner),
+    path('sides', views.sides),
+    path('desserts', views.desserts),
 ]
