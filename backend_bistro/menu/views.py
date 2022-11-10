@@ -18,13 +18,13 @@ def fullmenu(request):
             "price": item.price,
             "spicy_level": item.spicy_level,
             "cuisine": {
-                "title": item.cuisine_id.title
+                "title": item.cuisine.title
             },
             "category": {
-                "title": item.category_id.title
+                "title": item.category.title
             },
             "ingredients": {
-                "title": list(item.ingredient_id.values())
+                "title": list(item.ingredient.values())
             },
             # "cuisine": (Cuisine.objects.get(id=item.cuisine_id)),
             # "category": (Category.objects.get(id=item.category_id)),
@@ -33,38 +33,43 @@ def fullmenu(request):
     return JsonResponse(dishes, safe=False)
 
 def appetizers(request):
-    apps = list(Dish.objects.filter(category_id=1).values())
+    apps = list(Dish.objects.filter(category=1).values())
     return JsonResponse(apps, safe=False)
     # return HttpResponse("This is the appetizer list.")
 
 def breakfast(request):
-    breakfast = list(Dish.objects.filter(category_id=2).values())
+    breakfast = list(Dish.objects.filter(category=2).values())
     return JsonResponse(breakfast, safe=False)
 
 def brunch(request):
-    brunch = list(Dish.objects.filter(category_id=3).values())
+    brunch = list(Dish.objects.filter(category=3).values())
     return JsonResponse(brunch, safe=False)
 
 def lunch(request):
-    lunch = list(Dish.objects.filter(category_id=4).values())
+    lunch = list(Dish.objects.filter(category=4).values())
     return JsonResponse(lunch, safe=False)
 
 def dinner(request):
-    dinner = list(Dish.objects.filter(category_id=5).values())
+    dinner = list(Dish.objects.filter(category=5).values())
     return JsonResponse(dinner, safe=False)
 
 def sides(request):
-    sides = list(Dish.objects.filter(category_id=6).values())
+    sides = list(Dish.objects.filter(category=6).values())
     return JsonResponse(sides, safe=False)
 
 def desserts(request):
-    desserts = list(Dish.objects.filter(category_id=7).values())
+    desserts = list(Dish.objects.filter(category=7).values())
     return JsonResponse(desserts, safe=False)
 
 def eggdishes(request):
-    eggdishes = list(Dish.objects.filter(ingredient_id=1).values())
-    return JsonResponse(eggdishes, safe=False)
+    htmlinsert = ""
+    eggdishes = list(Dish.objects.filter(ingredient=1).values())
+    for item in eggdishes:
+        htmlinsert = htmlinsert + "<li>" + str(list(item.title)) + "</li>"
+    html = "<html><body><h1>These Dishes Contain Egg or Egg Products:</h1><ul> %s </ul></body></html>" % htmlinsert
+    return HttpResponse(html)
+    # return JsonResponse(eggdishes, safe=False)
 
 def dairy(request):
-    dairy = list(Dish.objects.filter(Q(ingredient_id=2) | Q(ingredient_id=3) | Q(ingredient_id=8)).values())
+    dairy = list(Dish.objects.filter(Q(ingredient=2) | Q(ingredient=3) | Q(ingredient=8)).values())
     return JsonResponse(dairy, safe=False)
