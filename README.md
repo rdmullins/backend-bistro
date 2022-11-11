@@ -12,6 +12,7 @@ The main API is a plug-and-play replacement for an earlier hosted API that sudde
 /menu/fullmenu | Main API; returns JSON response with dish title, price, description, and nested cuisine and menu category information|
 /menu/eggdishes| Returns a user-friendly list of all dishes in the database they use eggs or egg products. Handy reference for customers or servers in the event of allergies
 /menu/dairy| Similar to eggdishes, but lists (in a user-friendly format) dishes that have dairy products in their ingredients
+/menu/menu-to-csv|Downloads a .csv file of all menu data
 /menu/appetizers|Similar to fullmenu, but filtered to return only appetizers (returns JSON)
 /menu/breakfast|Similar to fullmenu, but filtered to return only breakfast items (returns JSON)
 /menu/brunch|Similar to fullmenu, but filtered to return only brunch selections (returns JSON)

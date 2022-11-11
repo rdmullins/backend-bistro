@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse
 from .models import Dish, Cuisine, Category, Ingredient
 from django.forms.models import model_to_dict
-from django.db.models import Q
+from django.db.models import Q # Support for 'OR' chain in query
+import csv
+import io # For PDF Generation
+from reportlab.pdfgen import canvas 
 
 # Create your views here.
 def fullmenu(request):
@@ -94,3 +97,16 @@ def dairy(request):
     return HttpResponse(html)
     # dairy = list(Dish.objects.filter(Q(ingredient=2) | Q(ingredient=3) | Q(ingredient=8)).values())
     # return JsonResponse(dairy, safe=False)
+
+def menu_to_csv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': 'attachment; filename="gitgrub-menu.csv"'},
+    )
+
+    menu = list(Dish.objects.values())
+    writer = csv.writer(response)
+    for dish in menu:
+        writer.writerow(dish.values())
+    return response
