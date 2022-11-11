@@ -31,4 +31,4 @@ class Dish(models.Model):
     ingredient = models.ManyToManyField(Ingredient)
 
     def __str__(self):
-        return 'Title: %s, Desc.: %s, Price: $%s, Spice Level: %s, Category: %s, Cuisine: %s' % (self.title, self.description, self.price, self.spicy_level, self.category_id.title, self.cuisine_id.title)
+        return 'Title: %s, Desc.: %s, Price: $%s, Spice Level: %s, Category: %s, Cuisine: %s' % (self.title, self.description, self.price, self.spicy_level, self.category.title, self.cuisine.title)

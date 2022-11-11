@@ -63,13 +63,34 @@ def desserts(request):
 
 def eggdishes(request):
     htmlinsert = ""
-    eggdishes = list(Dish.objects.filter(ingredient=1).values())
+    eggdishes = list(Dish.objects.filter(ingredient=1).all())
     for item in eggdishes:
-        htmlinsert = htmlinsert + "<li>" + str(list(item.title)) + "</li>"
-    html = "<html><body><h1>These Dishes Contain Egg or Egg Products:</h1><ul> %s </ul></body></html>" % htmlinsert
+        htmlinsert = htmlinsert + "<li>" + str(item.title) + "</li>"
+    html = """
+    <html>
+    <body>
+        <h1>These Dishes Contain Egg or Egg Products:</h1>
+        <ul> 
+            %s 
+        </ul>
+    </body>
+    </html>""" % htmlinsert
     return HttpResponse(html)
-    # return JsonResponse(eggdishes, safe=False)
 
 def dairy(request):
-    dairy = list(Dish.objects.filter(Q(ingredient=2) | Q(ingredient=3) | Q(ingredient=8)).values())
-    return JsonResponse(dairy, safe=False)
+    htmlinsert = ""
+    dairy = list(Dish.objects.filter(Q(ingredient=2) | Q(ingredient=3) | Q(ingredient=8)).all())
+    for item in dairy:
+        htmlinsert = htmlinsert + "<li>" + str(item.title) + "</li>"
+    html = """
+    <html>
+    <body>
+        <h1>These Dishes Contain Dairy:</h1>
+        <ul> 
+            %s 
+        </ul>
+    </body>
+    </html>""" % htmlinsert
+    return HttpResponse(html)
+    # dairy = list(Dish.objects.filter(Q(ingredient=2) | Q(ingredient=3) | Q(ingredient=8)).values())
+    # return JsonResponse(dairy, safe=False)
