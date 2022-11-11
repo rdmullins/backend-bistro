@@ -11,4 +11,7 @@ urlpatterns = [
     path('dinner', views.dinner),
     path('sides', views.sides),
     path('desserts', views.desserts),
+    path('eggdishes', views.eggdishes),
+    path('dairy', views.dairy),
+    path('menu-to-csv', views.menu_to_csv),
 ]
